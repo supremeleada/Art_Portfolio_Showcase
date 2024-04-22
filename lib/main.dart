@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'services/firebase_options.dart';
+import 'services/authentication_service.dart'; // Ensure you have this import
 import 'screens/login_screen.dart';
 import 'screens/registration_screen.dart';
 import 'screens/home_screen.dart';
@@ -10,11 +12,16 @@ import 'screens/artist_profile_screen.dart';
 import 'screens/collection_detail_screen.dart';
 import 'screens/messaging_screen.dart';
 
-
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(FirebaseInitializer(child: MyApp()));
+  runApp(
+    FirebaseInitializer(
+      child: Provider<AuthenticationService>(
+        create: (context) => AuthenticationService(),
+        child: MyApp(),
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -22,16 +29,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Artfolio',
-      theme: ThemeData(
-        primaryColor: Colors.blue,
-        colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.cyan[600]),
-        fontFamily: 'Georgia',
-        textTheme: TextTheme(
-          headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-          headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-          bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-        ),
-      ),
       initialRoute: '/',
       routes: {
         '/': (context) => const LoginScreen(),
