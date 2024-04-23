@@ -1,3 +1,5 @@
+// screens/login_screen.dart
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/authentication_service.dart';
@@ -54,7 +56,7 @@ class LoginScreen extends StatelessWidget {
               child: Text(
                 "Not registered yet? Sign up here!",
                 style: TextStyle(
-                  color: Colors.blue, // Use theme color perhaps?
+                  color: Colors.blue,
                   decoration: TextDecoration.underline,
                 ),
               ),
